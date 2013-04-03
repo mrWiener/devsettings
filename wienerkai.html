@@ -1,0 +1,119 @@
+<html>
+<head>
+	<title>wienerkai colors</title>
+	<style>
+		.text {
+			width:80%;
+			padding-top: 3em;
+			padding-bottom: 3em;
+			font-size: 2em;
+			color: black;
+			text-align: center;
+			margin-left: 10%;
+
+		}
+
+		.header h1 {
+			color: #CFCFC2;
+		}
+		.header p{
+			color: #A6E22E;
+		}
+
+		.color {
+			font-weight: bold;
+		}
+
+		.dark {
+			color: #75715E;
+		}
+
+		body {
+			background: #272822;
+		}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".color").each(function(){
+				var components = hex2rgba($(this).html());
+				$(this).css({"background":"rgba(" + components.r + ", " + components.g + ", " + components.b + ", " + components.a + ")"});
+			});
+		});
+
+		hex2rgba = function(hex) {
+			var hexa = null, components = null;
+
+			function hex2rgb(hex) {
+				// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+				var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+				
+				hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+					return r + r + g + g + b + b;
+				});
+
+				var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+				
+				return result ? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16)
+				} : null;
+			}
+
+			if(hex.length === 9) {
+				hexa = hex.substr(7, 2);
+				hex = hex.substr(0, 7);
+			}
+
+			components = hex2rgb(hex);
+			if(components == null) {
+				return null;
+			}
+
+			components.a = 1.0;
+
+			if(hexa) {
+				//there is an alpha channel.
+				components.a = parseInt(hexa, 16) / 255;
+			}
+
+			return components;
+		}
+		
+		
+
+	</script>
+</head>
+<body>
+	<div class="header text">
+		<h1>wienerkai theme color chart</h1>
+		<p>(same colors as monokai theme)</p>
+	</div>
+
+	<div class="color text dark">#000000</div>
+	<div class="color text dark">#222218</div>
+	<div class="color text">#272822</div>
+	<div class="color text">#3B3A32</div>
+	<div class="color text">#3E3D32</div>
+	<div class="color text">#49483E</div>
+	<div class="color text">#75715E</div>
+	<div class="color text">#F8F8F2A5</div> <!-- RRGGBBAA -->
+
+	<div class="color text">#CFCFC2</div>
+	<div class="color text">#F8F8F0</div>
+	<div class="color text">#F8F8F2</div>
+
+	<div class="color text">#9D550FB0</div> <!-- RRGGBBAA -->
+	<div class="color text">#FD971F</div>
+	<div class="color text">#E6DB74</div>
+	<div class="color text">#FFE792</div>
+
+	<div class="color text">#AE81FFA0</div> <!-- RRGGBBAA -->
+	<div class="color text">#AE81FF</div>
+	<div class="color text">#66D9EF</div>
+
+	<div class="color text">#F92672</div>
+	<div class="color text">#A6E22E</div>
+</body>
+</html>
