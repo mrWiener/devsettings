@@ -1,0 +1,4 @@
+[color "status"]
+	untracked = cyan
+	blue = green
+	added = green
